@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <meta charset="utf-8">
+    <title>Рандомайзер цвета фона</title>
+    <body>
+        <button class="button" onclick="change_color()">Нажми меня</button>
+        <style>
+            .button{
+                color: #000000;
+                background-color: aquamarine;
+            }
+        </style>
+        <script>
+            function change_color(){
+                /* 16777215 - это это максимальное значение, которое можно представить 24-битным HEX-цветом
+                toString - переводит число в HEX-формат и потом мы добавляем к нему '#' тем самым получая цвет */
+                const color = '#'+ Math.floor(Math.random()*16777215).toString(16)
+                /*Здесь применяется цвет к странице*/
+                document.body.style.backgroundColor = color;
+                
+            }
+        </script>
+
+    </body>
+</html>
