@@ -6,100 +6,206 @@
     </head>
     <body>
             <div class="calculator">
-            <div class="display">
-                <div class="display_above "></div>
-                <div class="display_below">0</div>
+            <div class="display" id="display">
+                <div class="display_above "><div class="display_above_text">
+                    </div></div>
+                <div class="display_below">
+                    <div class="display_below_text">0
+                    </div></div>
             </div>
             <div class="buttons">
-                <button class="clear1">C</button>
-                <button class="clear2"><</button>
-                <button class="operator1">.</button>
-                <button class="operator2">*</button>
-                <button class="operator3">/</button>
-                <button class="operator4">+</button>
-                <button class="operator5">-</button>
-                <button class="operator6">=</button>
-                <button class="operator7">(</button>
-                <button class="operator8">)</button>
-                <button class="number0">0</button>
-                <button class="number1">1</button>
-                <button class="number2">2</button>
-                <button class="number3">3</button>
-                <button class="number4">4</button>
-                <button class="number5">5</button>
-                <button class="number6">6</button>
-                <button class="number7">7</button>
-                <button class="number8">8</button>
-                <button class="number9">9</button>
+                <button class="clear" onclick="clearDisplay()">C</button>
+                <button class="clear" onclick="backspace()"><</button>
+                <button class="operator" onclick="appendToDisplay('.')">.</button>
+                <button class="operator" onclick="appendToDisplay('*')">*</button>
+                <button class="number" onclick="appendToDisplay('7')">7</button>
+                <button class="number" onclick="appendToDisplay('8')">8</button>
+                <button class="number" onclick="appendToDisplay('9')">9</button>
+                <button class="operator" onclick="appendToDisplay('/')">/</button>
+                <button class="number" onclick="appendToDisplay('4')">4</button>
+                <button class="number" onclick="appendToDisplay('5')">5</button>
+                <button class="number" onclick="appendToDisplay('6')">6</button>
+                <button class="operator" onclick="appendToDisplay('+')">+</button>
+                <button class="number" onclick="appendToDisplay('1')">1</button>
+                <button class="number" onclick="appendToDisplay('2')">2</button>
+                <button class="number" onclick="appendToDisplay('3')">3</button>
+                <button class="operator" onclick="appendToDisplay('-')">-</button>
+                <button class="number" onclick="appendToDisplay('(')">(</button>
+                <button class="number" onclick="appendToDisplay('0')">0</button>
+                <button class="number" onclick="appendToDisplay(')')">)</button>
+                <button class="answer" onclick="calculate('=')">=</button>
+                
+                
+                
+                
             </div>
         </div>
         
-        <style>
-            body {
-            background-color: rgb(37, 37, 37); 
-            margin: 0; 
-            height: 100%; 
+    <style>
+    body {
+            background-color: rgb(37, 37, 37);
+            margin: 0;
+            height: 100%;
         }
-        .display{
+        .display {
+            border-radius: 20px 20px 0 0 !important;
+            overflow: hidden;
+        }
+        .clear, .operator, .answer {
+            color: white !important;
+            width: 90px;
+            height: 90px;
+            border-radius: 100px;
+            background-color: #cf7c44;
+            font-size: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+        }
+        .number {
+            color: white !important;
+            width: 90px;
+            height: 90px;
+            border-radius: 100px;
+            background-color: #7e7d7c;
+            font-size: 30px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+        }
+
+        .display_above, .display_below {
+            width: 100%;
+            background-color: #474747;
+            height: 145px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center; 
+            justify-content: flex-end;
+            overflow: hidden;
+        }
+        
+        .display_above_text, .display_below_text {
+            font-size: 30px;
+            color: white;
+            white-space: nowrap; /* чтобы строки не переносились */
+            overflow: hidden;
+            text-overflow: ellipsis; /*ставит ... когда текст уже не помещается в дисплей*/
+            max-width: 100%;
+            text-align: right;
+        }
+        
+        .display_above {
             border-radius: 20px 20px 0 0 !important;
         }
-            
-            .calculator{
-                width: 468px;
-                height: 773px;
-                background-color: #5e5e5e;
-                position: absolute;
-                left:400px;
-                box-shadow: 10px 5px 5px #474747 ;
-                border: 2px #d8d8d8;
-                border-radius: 20px !important;
-                top: 105px;
-            }
-            .display_above{
-                width: 468px;
-                background-color: azure;
-                position: absolute;
-                height: 145px;
-                border-radius: 20px 20px 0 0  !important;
-
-            }
-            .display_below{
-                width: 468px;
-                background-color: rgb(103, 218, 218);
-                position: absolute;
-                height: 145px;
-                top: 145px;
-            }
-            .buttons{
-                color: rgb(179, 20, 20);
-                width: 117px;
-                height: 117px;
-                border-radius: 100px !important;
-                position: absolute;
-                top: 339px;
-            }
-
+        
+        .display_below {
+            border-top: 2px solid #858585 !important;
+        }
+        
+        .calculator {
+            width: 468px;
+            height: 826px;
+            background-color: #5e5e5e;
+            position: absolute;
+            left: 400px;
+            box-shadow: 10px 5px 5px #3a3a3a;
+            border: 2px solid #887e7e;
+            border-radius: 20px !important;
+            top: 105px;
+        }
+        
+        .buttons {
+            color: rgb(179, 20, 20);
+            width: 117px;
+            height: 117px;
+            position: absolute;
+            top: 320px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            left: 38px;
+        }
 
         </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <script>
+            /*ссылается на верхний дисплей*/
+            const displayAbove = document.querySelector('.display_above_text');
+             /*ссылается на нижний дисплей*/
+            const displayBelow = document.querySelector('.display_below_text');
+            /*хранит в себе текущее заданное выражение*/
+            let currentExpression = '';
+            let shouldResetInput = false; // Флаг для сброса ввода после вычисления
 
+            /*Функция ввода символов на дисплей*/
+           function appendToDisplay(value) {
+        /*Если получили результат и пишем +-* /, тогда выводится результат и этот знак   */
+        if (shouldResetInput && '+-*/'.includes(value)) {
+            /*начинается новое выражение*/
+            currentExpression = displayBelow.textContent + value;
+            /*его отображение*/
+            displayBelow.textContent = currentExpression;
+            shouldResetInput = false;
+            return;
+        }
+        
+        /*Если нужно сбросить ввод и вводится число*/
+        if (shouldResetInput && !'+-*/'.includes(value)) {
+            clearDisplay();
+            shouldResetInput = false;
+        }
+        
+        if (displayBelow.textContent === '0' && value !== '.' && !'+-*/'.includes(value)) {
+            currentExpression = '';
+            displayBelow.textContent = '';
+        }
+        
+        currentExpression += value;
+        displayBelow.textContent = currentExpression;
+    }
+    /*Очистка дисплеев*/
+    function clearDisplay() {
+        currentExpression = '';
+        displayAbove.textContent = '';
+        /*устанавливает в нижний 0 после очистки*/
+        displayBelow.textContent = '0';
+        shouldResetInput = false;
+    }
+    /*Метод slice() в JavaScript возвращает поверхностную копию части массива или строки, 
+    выбранную от начального до конечного индекса (конечный индекс не включается)*/
+    function backspace() {
+        if (shouldResetInput) {
+            clearDisplay();
+            return;
+        }
+        currentExpression = currentExpression.slice(0, -1);
+        displayBelow.textContent = currentExpression || '0';
+    }
+    
+    function calculate() {
+        try { /*Если оно пустое, то выход из функции*/
+            if (!currentExpression) return;
+            /*Сохраняем выражение для отображения*/
+            const expressionToShow = currentExpression;
+            /*Вычисляем результат (заменяя × на * для корректной работы eval)
+            eval - принимает строку, вычисляет и возвращает результат
+            .replace(/×/g, '*') - заменяет все символы × на *, так как eval понимает только * для умножения*/
+            const result = eval(currentExpression.replace(/×/g, '*'));
+            /*отображаем выражение на верхнем дисплее*/
+            displayAbove.textContent = expressionToShow + ' =';
+            /*результат на нижнем дисплее*/
+            displayBelow.textContent = result;
+            
+            /*Устанавливаем флаг, что следующее нажатие должно сбросить ввод*/
+            shouldResetInput = true;
+            /*Но сохраняем результат для возможного продолжения вычислений (как строку)*/
+            currentExpression = String(result);
+            /*Обработка ошибки*/
+        } catch (error) {
+            displayBelow.textContent = 'Error';
+            currentExpression = '';
+            shouldResetInput = false;
+        }
+    }
         </script>
     </body>
 
