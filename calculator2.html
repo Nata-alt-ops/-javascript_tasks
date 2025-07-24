@@ -73,10 +73,7 @@
         <script>
     function get_number(){
         const input_number = document.getElementById('input').value;
-        const numbers = input_number
-            .split(' ')
-            .filter(str => str.trim() !== '' && !isNaN(str))
-            .map(Number);
+        const numbers = input_number.split(' ').map(Number);
     
         let pr = 1;
         for (const num of numbers) {
