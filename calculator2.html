@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Калькулятор</title>
+    </head>
+    <body>
+        <div class="con">
+            <input type="text" id="input" class="input_text">
+            
+        </div>
+        <div class="con1">
+            <button class="button" onclick="get_number()">Вычислить</button>
+            
+        </div>
+        <div class="con2">
+            <p class="text">1.Произведение чисел:<input type="text" id="answer1" class="button1"></p>
+            <p class="text">2.Сумма чисел:<input type="text" id="answer2" class="button1"></p>
+            <p class="text">3.Максимальное:<input type="text" id="answer3" class="button1"> Минимальное<input type="text" id="answer4" class="button1"></p>
+            <p class="text">4.Среднее арифметическое<input type="text" id="answer5" class="button1"></p>
+            <p class="text">5.Сумма четных<input type="text" id="answer6" class="button1">сумма нечетных чисел<input type="text" id="answer7" class="button1"></p>
+          
+            
+        </div>
+        
+        <style>
+            body{
+                background-color: #242424;
+            }
+            .con{
+                left:200px;
+                position: relative;
+            }
+            .con1{
+                left:200px;
+                position: relative;
+            }
+            .con2{
+                left:200px;
+                position: relative;
+            }
+            .input_text{
+                width: 244px;
+                height: 48px;
+                border: 2px solid  #e42020;
+                background-color: #242424;
+                border-radius: 5px;
+                color: #e42020;
+              
+            }
+            .button{
+                width: 251px;
+                height: 48px;
+                border: 2px solid  #e42020;
+                background-color: #242424;
+                border-radius: 5px;
+                cursor: pointer;
+                color: #e42020;
+            }
+            .button:hover{
+                background-color: #e42020;
+                color: #ffffff;
+            }
+            .text{
+                color: #e42020;
+            }
+            .button1{
+                border: none;
+                background-color: #242424;
+                color: #ffffff;
+            }
+        </style>
+        <script>
+    function get_number(){
+        const input_number = document.getElementById('input').value;
+        const numbers = input_number.split(' ').map(Number);
+    
+        let pr = 1;
+        for (const num of numbers) {
+            pr *= num;
+        } 
+        let sum = 0;
+        for (const num of numbers) {
+            sum += num;
+        }
+        const min = Math.min(...numbers);
+        const max = Math.max(...numbers);
+        const cr_ar = sum / numbers.length;
+        let sum_ch = 0;
+        let sum_nch = 0;
+        for (const num of numbers) {
+            if (num % 2 === 0) {
+                sum_ch += num;
+            } else {
+                sum_nch += num;
+            }
+        }
+        document.getElementById('answer1').value = pr;
+        document.getElementById('answer2').value = sum;
+        document.getElementById('answer3').value = max;
+        document.getElementById('answer4').value = min;
+        document.getElementById('answer5').value = cr_ar;
+        document.getElementById('answer6').value = sum_ch;
+        document.getElementById('answer7').value = sum_nch;
+    }
+
+
+
+
+        </script>
+    </body>
+</html>
